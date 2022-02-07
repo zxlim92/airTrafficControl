@@ -6,7 +6,7 @@ class AirTrafficControl:
     numRunway =0
     heightR =0
     widthR =0
-    planes = []
+    planeInAirSpace = []
     planesQ=[]
     runways=[]
     atcZone =10000
@@ -18,13 +18,24 @@ class AirTrafficControl:
     distBetweenHoldPoints = 400
     runWayEnterance =(0,0) # position where plane can enter
     firstNewX = 0 #store x coordinate of first point of Circle holding Point
-    firstNewY= 0  
+    firstNewY= 0
+    runWayEnterance = [0,350]  
     def __init__(self,numRunway, heightR, widthR):
         self.numRunway = numRunway
         self.heightR = heightR
         self.widthR = widthR
-    def goForLanding(plane):
-        print("landing")
+    def goForLanding(self,plane):
+        for x in range(len(self.runway)):
+            if(self.runways[x].checkEmpty()):
+                self.runways[x].planeLanding(plane)
+                return self.runWayEnterance
+        else:
+            return(self.checkEmptyHoldingCircle())
+    def checkEmptyHoldingCircle(self):
+        for x in range (len(self.circleHolding)):
+            if(CircleHolding[x].checkEmpty()):               
+                return CircleHolding[x].getPosition()
+
     def checkWithin100():
         print("checking")
     def genCircleHolding(self): #this function will generate circles where holdings happen
@@ -96,7 +107,29 @@ class AirTrafficControl:
     def genRunWaySize(self):
         self.runWaySizeCircleRadius = ((max(self.heightR,self.widthR*self.numRunway))/2)+self.minDistanceBetweenPlanes
 
-    
+    def addPlane(self, plane):
+        self.planeInAirSpace.append(plane)
+        
+    def updatePlanePos(self):
+        
+        planesLanded =[]
+        for x in range(len(self.planeInAirSpace)) :
+            print(x)
+            if(self.planeInAirSpace[x].getLandingOrHolding()==""): #means plane was just created
+                self.planeInAirSpace[x].angleToDestination(self.goForLanding(self.planeInAirSpace[x])) # get the destination coordinates (landing zone or holding point) and get the angle for it
+            self.planeInAirSpace[x].updatePath()
+            if(self.planeInAirSpace[x].getLandingOrHolding() == "Landing"):
+                if(self.planeInAirSpace[x].endOfRunway()):
+                    
+                    planesLanded.append(x)
+                    
+                    print("Last plane " + str(self.planeInAirSpace[0].getLandingOrHolding()) )
+        for i in range(len(planesLanded)): #assuming 2 planes can land at the same time
+            print("plane gone")
+            self.planeInAirSpace.pop()
+            planesLanded.pop()
+        
+
         
 
 

@@ -11,3 +11,7 @@ class CenterHoldingPoint:
         return self.__position
     def isFirst(self):
         return self.__firstPoint
+    def checkEmpty(self):
+        if(self.__plane is None):
+            return True
+        return False

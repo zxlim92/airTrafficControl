@@ -1,9 +1,10 @@
 from Plane import Plane
 class CenterHoldingPoint:
-    __plane = None
-    __position = [0,0]
-    __firstPoint = False
+    # __plane = None
+    # __position = [0,0]
+    # __firstPoint = False
     def __init__(self,xPos,yPos,firstPoint):
+        self.__position = [0,0]
         self.__position[0] = xPos
         self.__position[1] = yPos
         self.__firstPoint = firstPoint
@@ -11,7 +12,7 @@ class CenterHoldingPoint:
         return self.__position
     def isFirst(self):
         return self.__firstPoint
-    def checkEmpty(self):
-        if(self.__plane is None):
-            return True
-        return False
+    # def checkEmpty(self):
+    #     if(self.plane is None):
+    #         return True
+    #     return False

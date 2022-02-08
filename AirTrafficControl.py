@@ -19,7 +19,7 @@ class AirTrafficControl:
         self.runWaySizeCircleRadius =0
         self.minDistanceBetweenPlanes =100
         self.radiusCircleHoldZone=0
-        self.distBetweenHoldPoints = 400
+        self.distBetweenHoldPoints = 900
         self.firstNewX = 0 #store x coordinate of first point of Circle holding Point
         self.firstNewY= 0
        
@@ -44,9 +44,9 @@ class AirTrafficControl:
         runWayEnterance = [0,-350] 
         radius= self.atcZone - self.minDistanceBetweenPlanes - self.runWaySizeCircleRadius # radius of circle where circle holding the holding points can be
         numZone = radius//self.distBetweenHoldPoints
-
+        print("ehgbweioubgw " + str(numZone))
         for x in range(int(numZone)):
-            radiusCircleHolding = self.runWaySizeCircleRadius + 400*(x+1)
+            radiusCircleHolding = self.runWaySizeCircleRadius + (400+900)*(x+1)
             self.circleHolding.append(CircleHolding(radiusCircleHolding)) # create appropriate num of circle holding
             numPoints = (2*self.circleHolding[x].getRadius()*3.14)//(400+500) # number of holding points
             for y in range(int(numPoints)):
@@ -78,8 +78,8 @@ class AirTrafficControl:
                     newY =  radiusCircleHolding*math.sin(angle)
                     self.holdPointList.append(CenterHoldingPoint(newX,newY,False))
            
-            for x in range(len(self.holdPointList)):
-                print(self.holdPointList[x].getPosition())
+            # for x in range(len(self.holdPointList)):
+            #     print(self.holdPointList[x].getPosition())
 
     def findOldAngle(self,prevHoldPoint):
         

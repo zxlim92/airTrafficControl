@@ -20,7 +20,6 @@ def main():
   
     airTrafficControl.addPlane(randomGenPlanes(id))
     id = id +1
-    print("----------------------------------------")
     while (1):
         if(random() < 0.01): # generate plane w a 1% chance every 0.1 seconds
             airTrafficControl.addPlane(randomGenPlanes(id))
